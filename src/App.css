@@ -1,82 +1,34 @@
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
-.splash-screen {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background: linear-gradient(to right, #2c3531, #d9b08c);
-  color: #fff;
-  text-align: center;
-  padding: 20px;
-}
-
-.welcome-text {
-  font-size: 2rem;
-  margin: 0;
-  margin-bottom: 20px;
-  animation: floatText 3s infinite;
-}
-
-@keyframes floatText {
-  0% {
-    transform: translateX(-50%);
-  }
-  50% {
-    transform: translateX(50%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.start-button {
-  background-color: #116466;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.start-button:hover {
-  background-color: #0a3a37;
-}
-
-@media (max-width: 768px) {
-  .welcome-text {
-    font-size: 1.5rem;
-  }
-
-  .start-button {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-  }
-}
-
-/* ---------------------Form---------------------------- */
-
+/* Form Container Styles */
 .review-form-container {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 20px;
   max-width: 1200px;
-  margin: auto;
+  margin: 10px auto;
+  box-sizing: border-box;
+}
+.button {
+  background-color: #c58255;
+  color: #001111;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -10px;
 }
 
 .top-section {
   display: flex;
   justify-content: space-between;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .form-section,
@@ -88,15 +40,14 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 400px; /* Set a minimum height to ensure equal sizing */
+  min-height: 664px;
+  box-sizing: border-box;
 }
 
 .review-form {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  flex-grow: 1; /* Allow form to grow and take space */
 }
 
 .review-form input {
@@ -114,12 +65,11 @@ body {
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-  margin-top: auto; /* Push the button to the bottom of the form */
+  margin-top: auto;
 }
 
 .submit-button:hover {
   background-color: #d9b08c;
-  color: black;
 }
 
 .generate-feedback-button {
@@ -130,10 +80,9 @@ body {
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-  margin-top: auto; /* Push the button to the bottom of the container */
+  margin-top: auto;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
 }
 
 .generate-feedback-button:hover {
@@ -145,136 +94,98 @@ body {
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  min-height: 150px; /* Set an initial height */
-  max-height: none; /* Allow it to expand based on content */
+  min-height: 150px;
   width: 100%;
   margin: 0 auto;
   overflow-y: auto;
+  box-sizing: border-box;
 }
 
-/* Additional styling to ensure height is consistent */
-@media (min-width: 768px) {
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .review-form-container {
+    padding: 10px 10px;
+  }
+
   .top-section {
-    align-items: stretch; /* Ensure equal height */
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
   }
 
   .form-section,
-  .submitted-details {
-    height: auto; /* Adjust based on content */
-  }
-}
-
-/* ------------------------------Nav Br------------------------------------ */
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background-color: #121212; /* Dark background */
-  color: #fff; /* Light text color */
-  font-family: "Roboto", sans-serif; /* Modern font */
-  position: relative;
-}
-
-/* Navbar logo styling */
-.navbar-logo a {
-  font-size: 1.5rem;
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* Navbar links styling */
-.navbar-links {
-  display: flex;
-  gap: 1.5rem; /* Space between nav items */
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.navbar-links li {
-  margin: 0;
-}
-
-.navbar-links a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-.navbar-links a:hover {
-  color: #ffcb9a; /* Hover effect color */
-}
-
-/* Hamburger menu styling */
-.navbar-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  position: absolute;
-  right: 20px; /* Align the toggle button to the right */
-  top: 1rem;
-}
-
-.navbar-toggle div {
-  width: 25px;
-  height: 3px;
-  background-color: #fff;
-  margin: 3px 0;
-  transition: 0.3s;
-}
-
-/* Mobile responsive styling */
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: row; /* Keep row direction but allow stacking of elements */
-    align-items: center;
-    padding: 1rem;
-  }
-
-  .navbar-links {
-    display: none; /* Hide links initially on mobile */
-    flex-direction: column;
-    gap: 1rem;
-    position: absolute;
-    top: 3.5rem; /* Position under the navbar */
-    right: 0; /* Align to right */
-    background-color: #121212; /* Background same as navbar */
+  .submitted-details,
+  .feedback-section {
     width: 100%;
-    padding: rem;
+    margin-bottom: 20px;
+    padding: 25px;
   }
 
-  .navbar-links.active {
-    display: flex; /* Show links when active */
+  .submit-button,
+  .generate-feedback-button {
+    font-size: 14px;
+    padding: 12px;
   }
 
-  .navbar-toggle {
-    display: flex; /* Show the toggle button on mobile */
+  .generate-feedback-button {
+    width: 90%;
+    margin: 20px auto 0;
   }
 
-  .navbar-toggle.active div {
-    background-color: #ffcb9a; /* Change color when active */
+  .button {
+    margin-left: 80%;
+  }
+
+  .submitted-details {
+    min-height: 200px;
+  }
+
+  .section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 0;
+  }
+
+  .button {
+    padding: 8px 16px;
+    font-size: 14px;
+    margin-left: 0;
   }
 }
+
+@media (min-width: 768px) {
+  .top-section {
+    align-items: flex-start;
+  }
+}
+
+/* Review Table Styles */
 
 .review-table-container {
   padding: 20px;
+  overflow-x: auto;
+}
+
+.table-container {
+  overflow: hidden;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
 }
 
 table {
   width: 100%;
-  border-collapse: collapse;
 }
 
 th,
 td {
   border: 1px solid #ddd;
   padding: 8px;
+  text-align: left;
 }
 
 th {
@@ -290,36 +201,64 @@ tr:hover {
   background-color: #ddd;
 }
 
-/* Icons styling */
+@media (max-width: 768px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #116466;
+    width: 100%;
+    background-color: #f9f9f9;
+    padding: 10px;
+  }
+
+  td {
+    display: flex;
+    text-align: left;
+    position: relative;
+    padding: 10px;
+    border: none;
+    background-color: #fff;
+    margin: 5px 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  td::before {
+    content: attr(data-label) ": ";
+    font-weight: bold;
+    background-color: #f9f9f9;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  .table-container td {
+    padding-left: 5%;
+    gap: 19px;
+  }
+
+  .table-container td::before {
+    padding-left: 10px;
+  }
+}
+
+/* Icons for Actions */
 .action-icon {
   cursor: pointer;
-  margin-right: 15px; /* Increase space between icons */
-  position: relative; /* Needed for tooltip positioning */
-}
-
-/* Tooltip styling */
-.action-icon::after {
-  content: attr(
-    data-tooltip
-  ); /* Display the tooltip text from data-tooltip attribute */
-  position: absolute;
-  bottom: -30px; /* Position the tooltip below the icon */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #333;
-  color: #fff;
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 12px;
-  opacity: 0; /* Hidden by default */
-  pointer-events: none;
-  white-space: nowrap;
-  transition: opacity 0.3s ease-in-out;
-  z-index: 1;
-}
-
-.action-icon:hover::after {
-  opacity: 1; /* Show the tooltip on hover */
+  margin-right: 15px;
 }
 
 .edit-icon {
@@ -342,8 +281,7 @@ tr:hover {
   color: #116466;
 }
 
-/* -----popup---------------- */
-
+/*------------------------------------- Popup Styles -------------------------------------------*/
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -361,44 +299,53 @@ tr:hover {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 90%; /* Adjusted width for better fit */
-  max-width: 500px; /* Reduced max-width */
-  box-sizing: border-box; /* Ensures padding is included in the width */
+  width: 90%;
+  max-width: 500px;
+  max-height: 770px;
+  overflow: auto;
+}
+
+.popUp-review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.popUp-form-section {
+  flex: 1;
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+  box-sizing: border-box;
 }
 
 .popup-content h2 {
   margin-bottom: 20px;
 }
 
-.form-section {
-  margin-bottom: 20px;
-}
-
-.form-section h3 {
-  margin-bottom: 10px;
-  font-size: 1.2rem;
-}
-
 .form-group {
   display: flex;
-  align-items: center; /* Align items vertically centered */
-  margin-bottom: 15px; /* Space between form groups */
+  align-items: center;
+  margin-bottom: 15px;
 }
 
 .form-group label {
-  flex: 1; /* Takes up available space */
-  margin-right: 10px; /* Space between label and input */
+  flex: 1;
+  margin-right: 10px;
   font-weight: bold;
 }
 
 .form-group input {
-  flex: 2; /* Takes up twice the space of label */
+  flex: 2;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box; /* Ensures padding does not exceed width */
-  width: 100%; /* Full width of the form-group */
-  max-width: 300px; /* Consistent size for inputs */
+  width: 100%;
+  max-width: 300px;
 }
 
 .submit-button,

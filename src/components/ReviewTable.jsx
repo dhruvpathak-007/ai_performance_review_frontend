@@ -19,6 +19,7 @@ import ShowNewReview from "./ShowNewReview";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import ReviewHistory from "./ReviewHistory";
+import { useNavigate } from "react-router-dom";
 
 const ReviewTable = () => {
   const [reviews, setReviews] = useState([]);
@@ -28,6 +29,7 @@ const ReviewTable = () => {
   const [newFeedback, setNewFeedback] = useState({});
   const [isFetching, setIsFetching] = useState(false);
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -51,7 +53,6 @@ const ReviewTable = () => {
   };
 
   const handleDownloadPDF = (review) => {
-    console.log("revew dat ias", review);
     const doc = new jsPDF();
     const pageHeight = doc.internal.pageSize.height;
     let yPosition = 30;
@@ -166,69 +167,85 @@ const ReviewTable = () => {
     setIsHistoryOpen(true);
   };
 
+  const handleBackClick = () => {
+    navigate("/");
+  };
+
   return (
     <div className="review-table-container">
-      <h2>Performance Reviews</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>ID</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Productivity</th>
-            <th>Teamwork</th>
-            <th>Punctuality</th>
-            <th>Problem Solving</th>
-            <th>Period mnts.</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {reviews.map((review) => (
-            <tr key={review._id}>
-              <td>{review.employeeName}</td>
-              <td>{review.employeeID}</td>
-              <td>{review.employeeEmail}</td>
-              <td>{review.employeePhone}</td>
-              <td>{review.productivity}</td>
-              <td>{review.teamwork}</td>
-              <td>{review.punctuality}</td>
-              <td>{review.problemSolving}</td>
-              <td>{review.evaluationPeriod}</td>
-              <td>
-                <FontAwesomeIcon
-                  icon={faEdit}
-                  data-tooltip="Edit"
-                  className="action-icon edit-icon"
-                  onClick={() => handleEditClick(review)}
-                />
-                <FontAwesomeIcon
-                  icon={faTrashAlt}
-                  className="action-icon delete-icon"
-                  onClick={() => handleDelete(review._id)}
-                />
-                <FontAwesomeIcon
-                  icon={faDownload}
-                  className="action-icon download-icon"
-                  onClick={() => handleDownloadPDF(review)}
-                />
-                <FontAwesomeIcon
-                  icon={faRedo}
-                  className="action-icon generate-icon"
-                  onClick={() => handleGenerateAgain(review)}
-                />
-                <FontAwesomeIcon
-                  icon={faHistory}
-                  data-tooltip="View History"
-                  className="action-icon history-icon"
-                  onClick={() => handleHistoryClick(review)}
-                />
-              </td>
+      <div className="section-heading">
+        <h2 style={{ color: "#c58255" }}>Reviews</h2>
+        <button className="button" onClick={handleBackClick}>
+          Back
+        </button>
+      </div>
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>ID</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Productivity</th>
+              <th>Teamwork</th>
+              <th>Punctuality</th>
+              <th>Communication</th>
+              <th>Problem Solving</th>
+              <th>Period mnts.</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {reviews.map((review) => (
+              <tr key={review._id}>
+                <td data-label="Name">{review.employeeName}</td>
+                <td data-label="ID">{review.employeeID}</td>
+                <td data-label="Email">{review.employeeEmail}</td>
+                <td data-label="Phone">{review.employeePhone}</td>
+                <td data-label="Productivity">{review.productivity}</td>
+                <td data-label="Teamwork">{review.teamwork}</td>
+                <td data-label="Punctuality">{review.punctuality}</td>
+                <td data-label="Communication">{review.communication}</td>
+                <td data-label="Problem Solving">{review.problemSolving}</td>
+                <td data-label="Period mnts.">{review.evaluationPeriod}</td>
+                <td data-label="Actions">
+                  <FontAwesomeIcon
+                    icon={faEdit}
+                    aria-label="Edit"
+                    className="action-icon edit-icon"
+                    onClick={() => handleEditClick(review)}
+                  />
+                  <FontAwesomeIcon
+                    icon={faTrashAlt}
+                    aria-label="Delete"
+                    className="action-icon delete-icon"
+                    onClick={() => handleDelete(review._id)}
+                  />
+                  <FontAwesomeIcon
+                    icon={faDownload}
+                    aria-label="Download PDF"
+                    className="action-icon download-icon"
+                    onClick={() => handleDownloadPDF(review)}
+                  />
+                  <FontAwesomeIcon
+                    icon={faRedo}
+                    aria-label="Generate Feedback"
+                    className="action-icon generate-icon"
+                    onClick={() => handleGenerateAgain(review)}
+                  />
+                  <FontAwesomeIcon
+                    icon={faHistory}
+                    aria-label="View History"
+                    className="action-icon history-icon"
+                    onClick={() => handleHistoryClick(review)}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {isPopupOpen && (
         <ReviewPopup

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import "../App.css"; // Ensure to style the popup
+import "../App.css";
 
 const ReviewPopup = ({ review, onClose, onUpdate }) => {
   const [formData, setFormData] = useState(review);
@@ -18,9 +18,9 @@ const ReviewPopup = ({ review, onClose, onUpdate }) => {
     <div className="popup-overlay">
       <div className="popup-content">
         <h2>Edit Review</h2>
-        <form onSubmit={handleSubmit} className="review-form">
+        <form onSubmit={handleSubmit} className="popUp-review-form">
           {/* Section for Personal Information */}
-          <div className="form-section">
+          <div className="popUp-form-section">
             <div className="form-group">
               <label htmlFor="employeeEmail">Employee Email</label>
               <input

@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { createReview, generateFeedback, updateReview } from "../api";
 import "../App.css";
+import { useNavigate } from "react-router-dom";
 
 const ReviewForm = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     employeeName: "",
     employeeID: "",
@@ -42,8 +45,6 @@ const ReviewForm = () => {
         communication: "",
         problemSolving: "",
       });
-
-      // Optionally show a success message
     } catch (error) {
       console.error("Error submitting review:", error);
     }
@@ -54,15 +55,20 @@ const ReviewForm = () => {
 
     try {
       setIsGenerating(true);
-      const newFeedback = await generateFeedback({
-        productivity: formData.productivity,
-        teamwork: formData.teamwork,
-        punctuality: formData.punctuality,
-        communication: formData.communication,
-        problemSolving: formData.problemSolving,
-      });
 
-      // Update the feedback state
+      const payload = {
+        productivity: submittedReview.productivity,
+        teamwork: submittedReview.teamwork,
+        punctuality: submittedReview.punctuality,
+        communication: submittedReview.communication,
+        problemSolving: submittedReview.problemSolving,
+      };
+
+      console.log("Payload for feedback generation:", payload);
+
+      const newFeedback = await generateFeedback(payload);
+
+      console.log("New feedback:", newFeedback);
 
       const feedbackObject = {
         review: newFeedback,
@@ -71,16 +77,13 @@ const ReviewForm = () => {
 
       setFeedback(feedbackObject);
 
-      // Merge new feedback with existing feedback
       const updatedReview = {
         ...submittedReview,
         feedback: [...(submittedReview.feedback || []), feedbackObject],
       };
 
-      // Save the updated review in the database
       await updateReview(updatedReview._id, updatedReview);
 
-      // Update the submitted review state
       setSubmittedReview(updatedReview);
     } catch (error) {
       console.error("Error generating feedback or updating review:", error);
@@ -89,8 +92,19 @@ const ReviewForm = () => {
     }
   };
 
+  const handleBackClick = () => {
+    navigate("/");
+  };
+
   return (
     <div className="review-form-container">
+      <div className="section-heading">
+        <h2 style={{ color: "#c58255" }}>Genrate</h2>
+        <button className="button" onClick={handleBackClick}>
+          Back
+        </button>
+      </div>
+
       <div className="top-section">
         {/* Form Section */}
         <div className="form-section">
