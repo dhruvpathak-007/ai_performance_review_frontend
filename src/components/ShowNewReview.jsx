@@ -6,7 +6,7 @@ const ShowNewReview = ({ feedback, onClose, isFetching }) => {
     <div className="popup-overlay">
       <div className="popup-content">
         <h2>{isFetching ? "Fetching New Feedback..." : "New Feedback"}</h2>
-        {isFetching ? <p>Loading...</p> : <p>{feedback.review}</p>}
+        {isFetching ? <p>Loading...</p> : <h5>{feedback.review}</h5>}
         <button type="button" className="cancel-button" onClick={onClose}>
           Close
         </button>
