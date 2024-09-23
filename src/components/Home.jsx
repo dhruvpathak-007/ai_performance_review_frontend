@@ -42,6 +42,9 @@ const Home = () => {
             <Link to="/submitted-reviews">Reviews</Link>
           </li>
           <li className="link">
+            <Link to="/employee-comparison">Evaluation</Link>
+          </li>
+          <li className="link">
             <a
               href="https://www.linkedin.com/in/dhruv-pathak-7773191b6/"
               target="_blank"
